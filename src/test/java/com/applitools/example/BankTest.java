@@ -21,13 +21,13 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.time.Duration;
 
 public class BankTest {
-    public EyesRunner eyesRunner;
-    public Eyes eyes;
-    public WebDriver driver;
+    public static EyesRunner eyesRunner;
+    public static Eyes eyes;
+    public static WebDriver driver;
     private final static BatchInfo BATCH = new BatchInfo("new Project with Applitools");
 
     @BeforeAll
-    public void configurations(){
+    public static void configurations(){
         System.out.println("Starting Execution our Framework....");
         eyesRunner = new VisualGridRunner(new RunnerOptions().testConcurrency(5));
         eyes = new Eyes(eyesRunner);
@@ -70,8 +70,9 @@ public class BankTest {
     }
 
     @AfterAll
-    public void tearDown(){
+    public static void tearDown(){
         System.out.println("Closing Our Test Cases...");
         driver.quit();
+        System.out.println(eyesRunner.getAllTestResults());
     }
 }
