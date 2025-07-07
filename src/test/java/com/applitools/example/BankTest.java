@@ -12,10 +12,7 @@ import com.applitools.eyes.visualgrid.model.DeviceName;
 import com.applitools.eyes.visualgrid.model.ScreenOrientation;
 import com.applitools.eyes.visualgrid.services.RunnerOptions;
 import com.applitools.eyes.visualgrid.services.VisualGridRunner;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -27,27 +24,27 @@ public class BankTest {
     public EyesRunner eyesRunner;
     public Eyes eyes;
     public WebDriver driver;
-    private final static BatchInfo BATCH = new BatchInfo("Selenium Project with Applitools");
+    private final static BatchInfo BATCH = new BatchInfo("new Project with Applitools");
 
     @BeforeAll
-    public static void configurations(){
+    public void configurations(){
         System.out.println("Starting Execution our Framework....");
-    }
-
-    @BeforeEach
-    public void setUp(){
         eyesRunner = new VisualGridRunner(new RunnerOptions().testConcurrency(5));
         eyes = new Eyes(eyesRunner);
-        Configuration config = (Configuration) eyes.getConfiguration().
-                setApiKey(System.getenv("APPLITOOLS_API_KEY")).
-                addBrowsers(
+        Configuration config = (Configuration) eyes.getConfiguration()
+                .setApiKey(System.getenv("APPLITOOLS_API_KEY"))
+                .addBrowsers(
                         new DesktopBrowserInfo(800, 1024, BrowserType.CHROME),
                         new DesktopBrowserInfo(1600, 1200, BrowserType.FIREFOX),
                         new DesktopBrowserInfo(1024, 768, BrowserType.SAFARI),
                         new ChromeEmulationInfo(DeviceName.Pixel_2, ScreenOrientation.PORTRAIT),
-                        new ChromeEmulationInfo(DeviceName.Nexus_10, ScreenOrientation.LANDSCAPE)).
-                setBatch(BATCH);
+                        new ChromeEmulationInfo(DeviceName.Nexus_10, ScreenOrientation.LANDSCAPE))
+        .setBatch(BATCH);
         eyes.setConfiguration(config);
+    }
+
+    @BeforeEach
+    public void setUp(){
         ChromeOptions options = new ChromeOptions().addArguments("--headless=new");
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
@@ -64,12 +61,17 @@ public class BankTest {
         driver.findElement(By.id("log-in")).click();
         Thread.sleep(2000);
         eyes.check(Target.window().fully().withName("Main Page"));
+    }
+
+    @AfterEach
+    public void applitoolsServerTearDown(){
+        System.out.println("Closing appliTools Server...");
         eyes.closeAsync();
-        driver.quit();
     }
 
     @AfterAll
-    public static void tearDown(){
+    public void tearDown(){
         System.out.println("Closing Our Test Cases...");
+        driver.quit();
     }
 }
