@@ -24,7 +24,7 @@ public class BankTest {
     public static EyesRunner eyesRunner;
     public static Eyes eyes;
     public static WebDriver driver;
-    private final static BatchInfo BATCH = new BatchInfo("new Project with Applitools");
+    private final static BatchInfo BATCH = new BatchInfo("First Test Cases with Applitools");
 
     @BeforeAll
     public static void configurations(){
