@@ -21,6 +21,11 @@ jobs:
           java-version: 17
           distribution: 'adopt'
 
+      - name: Log APPLITOOLS_API_KEY
+        run: echo "APPLITOOLS_API_KEY=$APPLITOOLS_API_KEY"
+        env:
+          APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
+
       - name: Install dependencies
         run: mvn install
 
