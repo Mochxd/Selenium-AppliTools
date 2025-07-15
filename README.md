@@ -39,6 +39,3 @@ or you can run it from the command line with Maven like this:
 ```
 mvn exec:exec@run-the-tests -Dexec.classpathScope=test
 ```
-
-**For full instructions on running this project, take our
-[Selenium Java Basic tutorial](https://applitools.com/tutorials/quickstart/web/selenium/java/basic)!**
