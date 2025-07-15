@@ -49,7 +49,7 @@
                             <arguments>
                                 <argument>-cp</argument>
                                 <classpath/>
-                                <argument>com.applitools.example.AcmeBankTests</argument>
+                                <argument>com.applitools.example.BankTest</argument>
                             </arguments>
                         </configuration>
                     </execution>
