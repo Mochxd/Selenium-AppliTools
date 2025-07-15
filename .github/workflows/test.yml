@@ -30,7 +30,7 @@ jobs:
         run: mvn install
 
       - name: Test code
-        run: mvn exec:exec -Dexec.mainClass=com.applitools.example.BankTest
+        run: mvn exec:exec@run-the-tests -Dexec.classpathScope=test
         env:
           APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
           HEADLESS: true
